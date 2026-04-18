@@ -40,7 +40,7 @@ export function UsersHeader() {
         />
       </div>
 
-      <Button asChild>
+      <Button className="rounded-lg" asChild>
         <Link href="/users/new">+ Adicionar</Link>
       </Button>
     </header>
