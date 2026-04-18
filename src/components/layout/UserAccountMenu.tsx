@@ -4,7 +4,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 
-import { useAuth } from "@/src/app/hooks/useAuth";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -16,6 +15,7 @@ import {
 import { cn } from "@/src/components/lib/utils";
 import { getUserInitials } from "@/src/lib/currentUser";
 import { ChevronDownIcon, LogOutIcon, SettingsIcon, UserIcon } from "lucide-react";
+import { useAuth } from "@/src/hooks/useAuth";
 
 export function UserAccountMenu() {
   const { user, isLoading } = useAuth();

@@ -3,10 +3,6 @@ import { cn } from "../lib/utils";
 import { UserAccountMenu } from "./UserAccountMenu";
 
 export function Menu() {
-
-  const navLinkClass =
-  "rounded-md px-3 py-2 text-sm font-medium text-gray-700 transition-colors hover:bg-gray-100 hover:text-gray-900";
-  
   return (
     <header
       className={cn(
@@ -23,17 +19,6 @@ export function Menu() {
             Sensedia Challenge
           </Link>
 
-          <nav
-            className="flex min-w-0 items-center gap-1"
-            aria-label="Menu principal"
-          >
-            <Link href="/users" className={navLinkClass}>
-              Usuários
-            </Link>
-            <Link href="/users/new" className={navLinkClass}>
-              Novo usuário
-            </Link>
-          </nav>
         </div>
 
         <div className="shrink-0">
