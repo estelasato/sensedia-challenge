@@ -1,31 +1,40 @@
 "use client";
 
-import { Input } from "@/src/components/ui/input";
 import { useEffect, useState } from "react";
 
-export type SearchInputProps = {
-  onSearch: (search?: string) => void;
-}
+import { Input } from "@/src/components/ui/input";
 
-export function SearchInput({ onSearch }: SearchInputProps) {
-  const [search, setSearch] = useState("");
+export type SearchInputProps = {
+  defaultSearch?: string;
+  onSearch: (search: string) => void;
+};
+
+export function SearchInput({
+  defaultSearch = "",
+  onSearch,
+}: SearchInputProps) {
+  const [search, setSearch] = useState(defaultSearch);
+
+  useEffect(() => {
+    setSearch(defaultSearch);
+  }, [defaultSearch]);
 
   useEffect(() => {
     const timeout = setTimeout(() => {
       onSearch(search);
     }, 500);
     return () => clearTimeout(timeout);
-  }, [search]);
-
+  }, [search, onSearch]);
 
   return (
-    <div className="relative ">
+    <div className="relative">
       <Input
-        type="text"
+        type="search"
         placeholder="Pesquisar"
         value={search}
         onChange={(e) => setSearch(e.target.value)}
+        autoComplete="off"
       />
     </div>
-  )
+  );
 }
