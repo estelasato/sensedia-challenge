@@ -1,4 +1,4 @@
-export type Pagination = {
+export type IPagination = {
   page: number;
   limit: number;
   pageCount: number;

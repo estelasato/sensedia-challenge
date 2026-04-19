@@ -1,8 +1,8 @@
-import type { User } from "@/src/lib/userService";
-import { formatDateTimePtBr } from "@/src/lib/formatDateTime";
-import { daysOfWeek } from "@/src/utils/daysOfWeekOptions";
+import type { IUser } from "@/src/lib/userService";
+import { formatDateTimePtBr } from "@/src/utils/formatDateTime";
+import { daysOfWeek } from "@/src/app/api/options/route";
 import { cn } from "@/src/components/lib/utils";
-import { getUserInitials } from "@/src/lib/currentUser";
+import { getUserInitials } from "@/src/lib/getCurrentUser";
 import { Avatar } from "@/src/components/avatar/Avatar";
 
 function formatDaysOfWeek(values?: number[]): string {
@@ -14,7 +14,7 @@ function formatDaysOfWeek(values?: number[]): string {
     .join(", ");
 }
 
-export function UserDetails({ user }: { user: User }) {
+export function UserDetails({ user }: { user: IUser }) {
   const cities = user.cities?.filter(Boolean) ?? [];
 
   const userData = [

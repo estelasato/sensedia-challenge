@@ -8,17 +8,11 @@ export interface Post {
   updated_at: string;
 }
 
-export async function getPosts(): Promise<{ posts: Post[] }> {
-  const res = await fetch(`${API_URL}/posts`, { cache: "no-store" });
-  if (!res.ok) throw new Error("Erro ao buscar posts.");
-  return res.json();
-}
-
 export async function getPostByUserId(
   userId: string,
 ): Promise<{ posts: Post[] }> {
   const res = await fetch(`${API_URL}/users/${userId}/posts`, {
-    cache: "no-store",
+    next: { revalidate: 60, tags: ["posts", `posts-${userId}`] },
   });
   if (!res.ok) throw new Error("Erro ao buscar posts do usuário.");
   return res.json();

@@ -1,7 +1,7 @@
-import type { Pagination } from "../types/pagination";
+import type { IPagination } from "../types/pagination";
 import { API_URL } from "./api";
 
-export interface User {
+export interface IUser {
   id: string;
   name: string;
   email: string;
@@ -21,8 +21,8 @@ export interface GetUserRequest {
 }
 
 export type GetUsersResponse = {
-  users: User[];
-  pagination: Pagination;
+  users: IUser[];
+  pagination: IPagination;
 };
 
 
@@ -35,12 +35,16 @@ export type CreateUserRequest = {
   cities?: string[];
 }
 
-export async function getUsers(request?: GetUserRequest): Promise<{ users: User[], pagination: Pagination }> {
-  const res = await fetch(`${API_URL}/users?${new URLSearchParams(request as Record<string, string>).toString()}`, {
-    cache: "no-store",
+export async function getUsers(): Promise<{ users: IUser[] }> {
+  // const t0 = performance.now();
+  const res = await fetch(`${API_URL}/users`, {
     method: "GET",
+    next: { revalidate: 60, tags: ["users"] },
   });
 
+/*   const ms = (performance.now() - t0).toFixed(1);
+  console.log(`testeeee ${ms}ms`);
+ */
   if (!res.ok) throw new Error("Erro ao buscar users");
 
   const data = await res.json();
@@ -71,7 +75,7 @@ export async function createUser(user: CreateUserRequest) {
   return res.json();
 }
 
-export async function getUserById(id: string): Promise<{ user: User } | null> {
+export async function getUserById(id: string): Promise<{ user: IUser } | null> {
   const res = await fetch(`${API_URL}/users/${id}`, {
     cache: "no-store",
   });

@@ -23,7 +23,7 @@ export function UserSection({ data }: UserSectionProps) {
     <div className="space-y-6">
       <UsersHeader startRouterTransition={startRouterTransition} />
 
-      <UsersTable users={users} onDelete={(user) => setTarget(user)} />
+      <UsersTable users={users} onDelete={(user) => setTarget(user)} startRouterTransition={startRouterTransition} />
 
       <Pagination
         pagination={data.pagination}
