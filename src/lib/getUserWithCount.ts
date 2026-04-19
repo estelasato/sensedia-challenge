@@ -18,8 +18,20 @@ export async function getUsersWithCounts(
 ): Promise<UsersWithCountsResult> {
   const { users, pagination } = await getUsers(req);
 
+  if (!users) {
+    return {
+      users: [],
+      pagination: {
+        page: 1,
+        limit: 10,
+        pageCount: 1,
+        total: 0,
+      },
+    };
+  }
+
   const enriched = await Promise.all(
-    users.map(async (u) => {
+    users?.map(async (u) => {
       const [posts, albums] = await Promise.all([
         getPostByUserId(u.id),
         getAlbumByUserId(u.id),
