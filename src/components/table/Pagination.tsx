@@ -1,6 +1,6 @@
 "use client";
 
-import { Pagination as PaginationType } from "@/src/types/pagination";
+import { IPagination as PaginationType } from "@/src/types/pagination";
 
 import {
   Pagination as PaginationNav,
