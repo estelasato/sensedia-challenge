@@ -2,18 +2,18 @@
 
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useTransition } from "react";
+import { useEffect, useTransition } from "react";
 
 import { StatusCard } from "@/src/components/card/StatusCard";
 import { Button } from "@/src/components/ui/button";
 
-export default function UserDetailError() {
+export default function UsersError() {
   const router = useRouter();
   const [isPending, startTransition] = useTransition();
 
   return (
     <StatusCard
-      title="Erro ao buscar dados"
+      title="Não foi possível carregar a lista"
       description="Ocorreu um erro ao buscar os dados. Tente novamente mais tarde."
     >
       <Button
@@ -22,10 +22,7 @@ export default function UserDetailError() {
         disabled={isPending}
         onClick={() => startTransition(() => router.refresh())}
       >
-        {isPending ? "Tentando…" : "Tentar novamente"}
-      </Button>
-      <Button asChild variant="outline">
-        <Link href="/users">Voltar à lista</Link>
+        {isPending ? "Carregando..." : "Tentar novamente"}
       </Button>
     </StatusCard>
   );
