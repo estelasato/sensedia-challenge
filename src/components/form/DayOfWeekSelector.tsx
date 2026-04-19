@@ -3,12 +3,7 @@
 import { useMemo } from "react";
 
 import { cn } from "@/src/components/lib/utils";
-import {
-  daysOfWeek,
-  daysOfWeekGroup,
-  type DayOfWeek,
-  type DayOfWeekGroup,
-} from "@/src/utils/daysOfWeekOptions";
+import { IDayOfWeek, IGroupOption } from "@/src/app/api/options/route";
 
 export type DayOfWeekSelectorProps = {
   value?: number[];
@@ -17,8 +12,8 @@ export type DayOfWeekSelectorProps = {
   errorMessage?: string;
   className?: string;
   disabled?: boolean;
-  options?: DayOfWeek[];
-  groups?: DayOfWeekGroup[];
+  options?: IDayOfWeek[];
+  groups?: IGroupOption[];
 };
 
 const sortNumeric = (arr: number[]) => [...arr].sort((a, b) => a - b);
@@ -30,8 +25,8 @@ export function DayOfWeekSelector({
   errorMessage,
   className,
   disabled = false,
-  options = daysOfWeek,
-  groups = daysOfWeekGroup,
+  options,
+  groups,
 }: DayOfWeekSelectorProps) {
   const selected = useMemo(() => new Set(value), [value]);
 
@@ -59,7 +54,7 @@ export function DayOfWeekSelector({
         <label className="text-sm font-medium text-foreground">{label}</label>
       )}
 
-      {groups.length > 0 && (
+      {groups && groups.length > 0 && (
         <div
           className="flex flex-wrap gap-1.5"
           role="group"
@@ -95,7 +90,7 @@ export function DayOfWeekSelector({
         aria-label={label ?? "Dias da semana"}
         className="grid grid-cols-4 md:grid-cols-7 gap-1.5"
       >
-        {options.map((d) => {
+        {options && options.map((d) => {
           const active = selected.has(d.value);
           return (
             <button
@@ -107,7 +102,7 @@ export function DayOfWeekSelector({
               aria-label={d.label}
               title={d.label}
               className={cn(
-                "h-9 flex-1 min-w-12 rounded-md border px-2 text-sm font-medium transition-all cursor-pointer",
+                "h-9 flex-1 min-w-12 rounded-md border-2 px-2 text-sm font-medium transition-all cursor-pointer",
                 "disabled:cursor-not-allowed disabled:opacity-50",
                 active
                   ? "border-primary-light text-primary-light shadow-sm  "

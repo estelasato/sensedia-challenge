@@ -4,7 +4,7 @@ import { useOptimistic, useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 
-import { deleteUser } from "@/src/lib/userService";
+import { deleteUserAction } from "@/src/lib/userActions";
 import type { UserWithCounts } from "@/src/lib/getUserWithCount";
 
 export function useDeleteUser(initialUsers: UserWithCounts[]) {
@@ -25,7 +25,7 @@ export function useDeleteUser(initialUsers: UserWithCounts[]) {
     startTransition(async () => {
       removeOptimistic(user.id);
       try {
-        await deleteUser(user.id);
+        await deleteUserAction(user.id);
         toast.success(`${user.name} removido com sucesso.`);
         router.refresh();
       } catch (err) {

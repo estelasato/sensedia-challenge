@@ -7,9 +7,11 @@ import { Button } from "@/src/components/ui/button";
 import { DayOfWeekSelector } from "@/src/components/form/DayOfWeekSelector";
 
 import { useUser } from "../hooks/useUser";
+import { Select } from "@/src/components/ui/select";
 
 export function UserForm() {
-  const { form, onSubmit, isSubmitting } = useUser();
+  const { form, onSubmit, isSubmitting, cities, daysOfWeek, daysOfWeekGroup } =
+    useUser();
   const {
     register,
     control,
@@ -53,9 +55,27 @@ export function UserForm() {
 
           <Controller
             control={control}
+            name="cities"
+            render={({ field, fieldState }) => (
+              <Select
+                isMulti
+                options={cities ?? []}
+                label="Cidades"
+                values={(field.value ?? []) as string[]}
+                onValuesChange={field.onChange}
+                errorMessage={fieldState.error?.message}
+                className="w-full"
+              />
+            )}
+          />
+
+          <Controller
+            control={control}
             name="days_of_week"
             render={({ field, fieldState }) => (
               <DayOfWeekSelector
+                options={daysOfWeek}
+                groups={daysOfWeekGroup}
                 label="Dias da semana"
                 value={field.value ?? []}
                 onChange={field.onChange}

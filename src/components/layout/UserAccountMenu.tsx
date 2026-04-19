@@ -13,7 +13,7 @@ import {
   DropdownMenuTrigger,
 } from "@/src/components/ui/dropdown-menu";
 import { cn } from "@/src/components/lib/utils";
-import { getUserInitials } from "@/src/lib/currentUser";
+import { getUserInitials } from "@/src/lib/getCurrentUser";
 import { ChevronDownIcon, LogOutIcon, SettingsIcon, UserIcon } from "lucide-react";
 import { useAuth } from "@/src/hooks/useAuth";
 import { Avatar } from "../avatar/Avatar";
