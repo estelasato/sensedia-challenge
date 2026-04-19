@@ -114,6 +114,11 @@ export function DataTable<TData, TValue>({
                     key={header.id}
                     scope="col"
                     className="whitespace-nowrap px-4 py-3 font-semibold text-text-primary"
+                    style={{
+                      width: header.getSize(),
+                      minWidth: header.column.columnDef.minSize,
+                      maxWidth: header.column.columnDef.maxSize,
+                    }}
                   >
                     {header.isPlaceholder
                       ? null
@@ -136,6 +141,11 @@ export function DataTable<TData, TValue>({
                   <td
                     key={cell.id}
                     className="px-4 py-3 align-middle"
+                    style={{
+                      width: cell.column.getSize(),
+                      minWidth: cell.column.columnDef.minSize,
+                      maxWidth: cell.column.columnDef.maxSize,
+                    }}
                   >
                     {flexRender(cell.column.columnDef.cell, cell.getContext())}
                   </td>
