@@ -16,13 +16,13 @@ import { cn } from "@/src/components/lib/utils";
 import { getUserInitials } from "@/src/lib/currentUser";
 import { ChevronDownIcon, LogOutIcon, SettingsIcon, UserIcon } from "lucide-react";
 import { useAuth } from "@/src/hooks/useAuth";
+import { Avatar } from "../avatar/Avatar";
 
 export function UserAccountMenu() {
   const { user, isLoading } = useAuth();
   const [open, setOpen] = useState(false);
 
   const initials = getUserInitials(user?.name ?? "N/A");
-  const showImage = Boolean(user?.image);
 
   if (!user) {
     return null;
@@ -40,24 +40,16 @@ export function UserAccountMenu() {
         aria-expanded={open}
         aria-haspopup="menu"
       >
-        <span className="min-w-0 flex-1 truncate font-medium">{user.name}</span>
-        <span
-          className="relative flex h-9 w-9 shrink-0 items-center justify-center overflow-hidden rounded-full bg-primary text-xs font-semibold text-white ring-2 ring-white"
-          aria-hidden
-        >
-          {showImage ? (
-            <Image
-              src={user.image!}
-              alt=""
-              width={36}
-              height={36}
-              className="h-full w-full object-cover"
-              unoptimized
-            />
-          ) : (
-            initials
-          )}
+        <span className="min-w-0 flex-1 truncate font-medium">
+          {user.name}
         </span>
+
+        <Avatar
+          src={user.image ?? null}
+          alt={user.name}
+          initials={initials}
+        />
+
         <ChevronDownIcon
           className={cn(
             "h-4 w-4 shrink-0 text-gray-500 transition-transform",
