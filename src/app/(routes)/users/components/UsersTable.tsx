@@ -33,6 +33,7 @@ export function UsersTable({
       error={error}
       emptyMessage="Nenhum usuário encontrado."
       minWidth="720px"
+      aria-label="Lista de usuários"
     />
   );
 }

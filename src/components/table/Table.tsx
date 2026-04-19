@@ -15,6 +15,7 @@ export type DataTableProps<TData, TValue = unknown> = {
   error?: string | null;
   minWidth?: string;
   className?: string;
+  "aria-label"?: string;
 };
 
 function TableSpinner({ label = "Carregando…" }: { label?: string }) {
@@ -37,6 +38,7 @@ export function DataTable<TData, TValue>({
   error = null,
   minWidth = "720px",
   className = "",
+  "aria-label": ariaLabel,
 }: DataTableProps<TData, TValue>) {
   const table = useReactTable({
     data,
@@ -99,6 +101,7 @@ export function DataTable<TData, TValue>({
         <table
           className="w-full border-collapse text-left text-sm"
           style={{ minWidth }}
+          {...(ariaLabel ? { "aria-label": ariaLabel } : {})}
         >
           <thead>
             {table.getHeaderGroups().map((headerGroup) => (

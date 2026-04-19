@@ -1,6 +1,13 @@
 "use client";
 
-import { Modal } from "./Modal";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from "@/src/components/ui/dialog";
 import { Button } from "../ui/button";
 
 export type ConfirmDeleteModalProps = {
@@ -23,32 +30,34 @@ export function ConfirmDeleteModal({
   loading = false,
 }: ConfirmDeleteModalProps) {
   return (
-    <Modal
-      className="md:max-w-[20rem]"
-      open={open}
-      onOpenChange={onOpenChange}
-      title="Confirmar exclusão"
-    >
-      <p>
-        Tem certeza que deseja remover <span className="font-bold">{title}</span>?
-      </p>
-
-      <div className="flex justify-end gap-2 mt-4">
-        <Button
-          variant="outline"
-          onClick={() => onOpenChange(false)}
-          disabled={loading}
-        >
-          {cancelLabel}
-        </Button>
-        <Button
-          variant="destructive"
-          onClick={onConfirm}
-          isLoading={loading}
-        >
-          {confirmLabel}
-        </Button>
-      </div>
-    </Modal>
+    <Dialog open={open} onOpenChange={onOpenChange}>
+      <DialogContent className="md:max-w-[20rem]">
+        <DialogHeader>
+          <DialogTitle>Confirmar exclusão</DialogTitle>
+          <DialogDescription>
+            Tem certeza que deseja remover{" "}
+            <span className="font-bold">{title}</span>?
+          </DialogDescription>
+        </DialogHeader>
+        <DialogFooter>
+          <Button
+            type="button"
+            variant="outline"
+            onClick={() => onOpenChange(false)}
+            disabled={loading}
+          >
+            {cancelLabel}
+          </Button>
+          <Button
+            type="button"
+            variant="destructive"
+            onClick={onConfirm}
+            isLoading={loading}
+          >
+            {confirmLabel}
+          </Button>
+        </DialogFooter>
+      </DialogContent>
+    </Dialog>
   );
 }
