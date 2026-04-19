@@ -28,7 +28,7 @@ export function UserDetails({ user }: { user: User }) {
   return (
     <article
       className={cn(
-        "w-full rounded-xl border border-border bg-white p-6 shadow-sm",
+        "w-full rounded-md border border-border bg-white p-6 shadow-sm",
       )}
     >
       <div className="mb-4 w-full flex justify-center">

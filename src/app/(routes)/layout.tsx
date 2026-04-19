@@ -4,7 +4,8 @@ export default function RoutesLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <div className="">
+    <div>
       {children}
-    </div>);
+    </div>
+    );
 }

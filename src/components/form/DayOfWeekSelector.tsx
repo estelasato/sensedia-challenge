@@ -79,7 +79,7 @@ export function DayOfWeekSelector({
                   "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/40",
                   "disabled:cursor-not-allowed disabled:opacity-50",
                   active
-                    ? "border-primary/30 bg-white text-primary "
+                    ? "border-primary-light bg-primary-light text-white"
                     : "border-border bg-muted/40 text-text-secondary ",
                 )}
               >
@@ -108,10 +108,9 @@ export function DayOfWeekSelector({
               title={d.label}
               className={cn(
                 "h-9 flex-1 min-w-12 rounded-md border px-2 text-sm font-medium transition-all cursor-pointer",
-                "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/40",
                 "disabled:cursor-not-allowed disabled:opacity-50",
                 active
-                  ? "border-primary bg-primary text-primary-foreground shadow-sm hover:bg-primary/90"
+                  ? "border-primary-light text-primary-light shadow-sm  "
                   : "border-border bg-white text-foreground hover:border-input hover:bg-muted",
               )}
             >

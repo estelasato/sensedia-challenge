@@ -2,8 +2,8 @@ import type { AuthUser } from "@/src/types/auth";
 
 const mock: AuthUser = {
   id: "session-user-1",
-  name: "Mariana Estela",
-  email: "mariana.estela@example.com",
+  name: "user teste",
+  email: "user.teste@example.com",
   image: null,
 };
 

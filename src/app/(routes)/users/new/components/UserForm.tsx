@@ -19,7 +19,7 @@ export function UserForm() {
   return (
     <FormProvider {...form}>
       <form onSubmit={onSubmit}>
-        <div className="max-w-md border border-border rounded-xl p-6 shadow-sm flex flex-col gap-4 mx-auto mt-4">
+        <div className="max-w-md border border-border rounded-md p-6 shadow-sm flex flex-col gap-4 mx-auto mt-4">
           <Input
             label="Nome*"
             {...register("name")}

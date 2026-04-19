@@ -5,7 +5,7 @@ export default function UserDetailLoading() {
     <div className="mx-auto mt-10 max-w-md">
       <BasicHeader title="Dados do Usuário" backHref="/users" />
       <article
-        className="w-full animate-pulse rounded-xl border border-border bg-white p-6 shadow-sm"
+        className="w-full animate-pulse rounded-md border border-border bg-white p-6 shadow-sm"
         aria-label="Carregando dados do usuário"
       >
         <div className="mb-4 flex justify-center">

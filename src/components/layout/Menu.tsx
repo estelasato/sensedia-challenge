@@ -14,7 +14,7 @@ export function Menu() {
         <div className="flex min-w-0 flex-1 items-center gap-2 sm:gap-6">
           <Link
             href="/"
-            className="shrink-0 text-sm font-bold tracking-tight text-gray-900 transition-colors hover:text-blue-600"
+            className="shrink-0 text-sm font-bold tracking-tight text-primary transition-colors hover:primary-light"
           >
             Sensedia Challenge
           </Link>
