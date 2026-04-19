@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 import { UserForm } from "./components/UserForm";
-import { NewUserHeader } from "./components/NewUserHeader";
+import { BasicHeader } from "@/src/components/header/BasicHeader";
 
 export const metadata: Metadata = {
   title: "Novo usuário",
@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 export default function NewUserPage() {
   return (
     <div className="mx-auto mt-10 max-w-md">
-      <NewUserHeader title="Novo usuário" backHref="/users" />
+      <BasicHeader title="Novo usuário" backHref="/users" />
       <UserForm />
     </div>
   );

@@ -68,7 +68,7 @@ export function DataTable<TData, TValue>({
   if (!loading && data.length === 0) {
     return (
       <p
-        className={`rounded-md border border-dashed border-border bg-white p-8 text-center text-sm ${className}`}
+        className={`rounded-md border border-border bg-white p-8 text-center text-sm ${className}`}
       >
         {emptyMessage}
       </p>

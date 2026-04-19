@@ -3,6 +3,7 @@ import { Trash2Icon } from "lucide-react";
 
 import type { UserWithCounts } from "@/src/lib/getUserWithCount";
 import { formatDateTimePtBr } from "@/src/lib/formatDateTime";
+import Link from "next/link";
 
 const col = createColumnHelper<UserWithCounts>();
 
@@ -17,7 +18,9 @@ export function getUsersTableColumns({
     col.accessor("name", {
       header: "Nome",
       cell: (info) => (
-        <span className="font-medium">{info.getValue()}</span>
+        <Link href={`/user/${info.row.original.id}`} className="hover:underline cursor-pointer">
+          <span className="font-medium">{info.getValue()}</span>
+        </Link>
       ),
     }),
     col.accessor("email", {

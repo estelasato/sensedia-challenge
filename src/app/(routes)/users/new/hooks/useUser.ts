@@ -49,8 +49,7 @@ export function useUser() {
 
     startTransition(async () => {
       try {
-        const data = await createUser(payload satisfies CreateUserRequest);
-        console.log(data, "data");
+        await createUser(payload satisfies CreateUserRequest);
         toast.success("Usuário criado com sucesso.");
         form.reset();
         router.refresh();
