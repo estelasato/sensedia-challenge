@@ -10,7 +10,7 @@ export function Menu() {
         "md:static md:bg-white md:shadow-none md:backdrop-blur-none",
       )}
     >
-      <div className="mx-auto flex h-14 max-w-6xl items-center justify-between gap-3 px-4">
+      <div className="mx-auto flex h-14 max-w-7xl items-center justify-between gap-3 px-4">
         <div className="flex min-w-0 flex-1 items-center gap-2 sm:gap-6">
           <Link
             href="/"
