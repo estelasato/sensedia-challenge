@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import { Input } from "@/src/components/ui/input";
 
@@ -14,17 +14,19 @@ export function SearchInput({
   onSearch,
 }: SearchInputProps) {
   const [search, setSearch] = useState(defaultSearch);
-
+  const onSearchRef = useRef(onSearch);
+  onSearchRef.current = onSearch;
+  
   useEffect(() => {
     setSearch(defaultSearch);
   }, [defaultSearch]);
 
   useEffect(() => {
     const timeout = setTimeout(() => {
-      onSearch(search);
+      onSearchRef.current(search);
     }, 500);
     return () => clearTimeout(timeout);
-  }, [search, onSearch]);
+  }, [search]);
 
   return (
     <div className="relative">

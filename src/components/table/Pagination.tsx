@@ -1,7 +1,5 @@
 "use client";
 
-import { useTransition } from "react";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { Pagination as PaginationType } from "@/src/types/pagination";
 
 import {
@@ -14,11 +12,14 @@ import {
   PaginationPrevious,
 } from "../ui/pagination";
 import { cn } from "@/src/components/lib/utils";
+import { useUrlNavigation } from "@/src/hooks/useUrlNavigation";
 
 export type PaginationProps = {
   pagination: PaginationType;
   siblingCount?: number;
   className?: string;
+  startRouterTransition: (fn: () => void) => void;
+  isRouterPending: boolean;
 };
 
 function getPageNumbers(
@@ -46,11 +47,10 @@ export function Pagination({
   pagination,
   siblingCount = 1,
   className = "",
+  startRouterTransition,
+  isRouterPending,
 }: PaginationProps) {
-  const router = useRouter();
-  const pathname = usePathname();
-  const searchParams = useSearchParams();
-  const [isPending, startTransition] = useTransition();
+  const navigate = useUrlNavigation(startRouterTransition);
 
   const { page, limit, pageCount, total } = pagination;
   const totalPages = Math.max(1, pageCount);
@@ -59,15 +59,9 @@ export function Pagination({
     const next = Math.min(totalPages, Math.max(1, target));
     if (next === page) return;
 
-    const params = new URLSearchParams(searchParams.toString());
-    if (next === 1) params.delete("page");
-    else params.set("page", String(next));
-
-    startTransition(() => {
-      router.replace(
-        params.toString() ? `${pathname}?${params.toString()}` : pathname,
-        { scroll: false },
-      );
+    navigate((params) => {
+      if (next === 1) params.delete("page");
+      else params.set("page", String(next));
     });
   };
 
@@ -92,7 +86,7 @@ export function Pagination({
         <PaginationContent>
           <PaginationItem>
             <PaginationPrevious
-              disabled={page === 1 || isPending}
+              disabled={page === 1 || isRouterPending}
               onClick={() => goTo(page - 1)}
             />
           </PaginationItem>
@@ -106,7 +100,7 @@ export function Pagination({
               <PaginationItem key={p}>
                 <PaginationLink
                   isActive={p === page}
-                  disabled={isPending}
+                  disabled={isRouterPending}
                   onClick={() => goTo(p)}
                 >
                   {p}
@@ -117,7 +111,7 @@ export function Pagination({
 
           <PaginationItem>
             <PaginationNext
-              disabled={page === totalPages || isPending}
+              disabled={page === totalPages || isRouterPending}
               onClick={() => goTo(page + 1)}
             />
           </PaginationItem>

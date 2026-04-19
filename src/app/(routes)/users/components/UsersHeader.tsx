@@ -1,33 +1,32 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { useCallback, useTransition } from "react";
+import { useSearchParams } from "next/navigation";
+import { useCallback } from "react";
 
 import { Button } from "@/src/components/ui/button";
+import { useUrlNavigation } from "@/src/hooks/useUrlNavigation";
 
 import { SearchInput } from "./SearchInput";
 
-export function UsersHeader() {
-  const router = useRouter();
-  const pathname = usePathname();
+type UsersHeaderProps = {
+  startRouterTransition: (fn: () => void) => void;
+};
+
+export function UsersHeader({ startRouterTransition }: UsersHeaderProps) {
   const searchParams = useSearchParams();
-  const [, startTransition] = useTransition();
+  const navigate = useUrlNavigation(startRouterTransition);
 
   const applySearch = useCallback(
     (search: string) => {
-      const params = new URLSearchParams(searchParams.toString());
-      const q = search.trim();
-      if (q) params.set("search", q);
-      else params.delete("search");
-      params.delete("page");
-
-      const qs = params.toString();
-      startTransition(() => {
-        router.replace(qs ? `${pathname}?${qs}` : pathname, { scroll: false });
+      navigate((params) => {
+        const q = search.trim();
+        if (q) params.set("search", q);
+        else params.delete("search");
+        params.delete("page");
       });
     },
-    [pathname, router, searchParams],
+    [navigate],
   );
 
   return (

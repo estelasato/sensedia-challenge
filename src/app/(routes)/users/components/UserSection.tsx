@@ -1,5 +1,7 @@
 "use client";
 
+import { useTransition } from "react";
+
 import type { UsersWithCountsResult } from "@/src/lib/getUserWithCount";
 
 import { Pagination } from "@/src/components/table/Pagination";
@@ -15,14 +17,19 @@ type UserSectionProps = {
 
 export function UserSection({ data }: UserSectionProps) {
   const { users, target, setTarget, confirm } = useDeleteUser(data.users);
+  const [isRouterPending, startRouterTransition] = useTransition();
 
   return (
     <div className="space-y-6">
-      <UsersHeader />
+      <UsersHeader startRouterTransition={startRouterTransition} />
 
       <UsersTable users={users} onDelete={(user) => setTarget(user)} />
 
-      <Pagination pagination={data.pagination} />
+      <Pagination
+        pagination={data.pagination}
+        startRouterTransition={startRouterTransition}
+        isRouterPending={isRouterPending}
+      />
 
       <ConfirmDeleteModal
         open={!!target}
