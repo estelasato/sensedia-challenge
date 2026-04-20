@@ -10,7 +10,7 @@ import type { UserWithCounts } from "@/src/lib/getUserWithCount";
 export function useDeleteUser(initialUsers: UserWithCounts[]) {
   const router = useRouter();
   const [target, setTarget] = useState<UserWithCounts | null>(null);
-  const [, startTransition] = useTransition();
+  const [isPending, startTransition] = useTransition();
   const [optimisticUsers, removeOptimistic] = useOptimistic(
     initialUsers,
     (state, userId: string) => state.filter((u) => u.id !== userId),
@@ -30,7 +30,6 @@ export function useDeleteUser(initialUsers: UserWithCounts[]) {
         router.refresh();
       } catch (err) {
         toast.error("Não foi possível remover o usuário.");
-        router.refresh();
       }
     });
   };
@@ -40,5 +39,6 @@ export function useDeleteUser(initialUsers: UserWithCounts[]) {
     target,
     setTarget,
     confirm,
+    isPending,
   };
 }

@@ -37,25 +37,24 @@ export function UsersTable({
   };
 
   const navigate = useUrlNavigation(startRouterTransition);
-  const onSort = useCallback(
-    (column: string) => {
-      const currentSort = searchParams.get("sort");
-      const currentOrder = searchParams.get("order");
-      navigate((params) => {
-        if (currentSort !== column) {
-          params.set("sort", column);
-          params.set("order", "asc");
-        }
-        params.set("order", currentOrder === "asc" ? "desc" : "asc");
-        params.delete("page");
-      });
-    },
-    [navigate, searchParams],
-  );
 
+  const onSort = useCallback((column: string) => {
+    const currentSort = searchParams.get("sort");
+    const currentOrder = searchParams.get("order");
+    navigate((params) => {
+      params.set("sort", column);
+      if (currentSort !== column) {
+        params.set("order", "asc");
+      } else {
+        params.set("order", currentOrder === "asc" ? "desc" : "asc");
+      }
+      params.delete("page");
+    });
+  }, [navigate, searchParams]);
+  
   const columns = useMemo(
     () => getUsersTableColumns({ onDelete, onSelectUser, onSort }),
-    [onDelete],
+    [onDelete, onSelectUser, onSort],
   );
 
   return (

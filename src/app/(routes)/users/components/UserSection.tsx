@@ -16,7 +16,7 @@ type UserSectionProps = {
 };
 
 export function UserSection({ data }: UserSectionProps) {
-  const { users, target, setTarget, confirm } = useDeleteUser(data.users);
+  const { users, target, setTarget, confirm, isPending } = useDeleteUser(data.users);
   const [isRouterPending, startRouterTransition] = useTransition();
 
   return (
@@ -38,6 +38,7 @@ export function UserSection({ data }: UserSectionProps) {
         }}
         onConfirm={confirm}
         title={target?.name ?? ""}
+        loading={isPending}
       />
     </div>
   );

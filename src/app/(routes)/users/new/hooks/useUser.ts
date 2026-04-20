@@ -85,10 +85,7 @@ export function useUser() {
   });
 
   useEffect(() => {
-    getOptions().then((data) => {
-      setCities(data.cities);
-      setDaysOfWeek(data.daysOfWeek);
-    });
+    getOptions()
   }, []);
 
   return {
