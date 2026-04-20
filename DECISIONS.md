@@ -47,3 +47,15 @@ dos dados.
 - **Cliente após mutação:** `router.refresh()` onde faz sentido para reexecutar os Server Components com dados atualizados.
 
 **Trade-offs:** RSC mantém a maior parte do JS fora do bundle do cliente; Server Actions evitam expor detalhes de mutação em vários lugares; mais camadas/conceitos a serem mantidos
+
+
+
+## Decisão: Optimistic UI na remoção de usuário
+
+**Contexto:** ao bloquear/remover um usuário, aguardar a resposta do servidor antes de atualizar a tabela pode gerar um delay visual na atualização da tabela
+
+**Opções consideradas:** atualizar a tabela só após o servidor responder (`router.refresh()` puro); usar `useState` local para filtrar o usuário removido; usar `useOptimistic` do React.
+
+**Decisão:** `useOptimistic` ao confirmar a remoção, `removeOptimistic(user.id)` remove o usuário da lista imediatamente na UI, enquanto a Server Action processa em paralelo. Após a resposta, `router.refresh()` sincroniza com o estado real do servidor.
+
+**Trade-offs:** experiência mais fluida sem delay visual; o `useOptimistic` reverte automaticamente o estado se a transição falhar. se múltiplos usuários alteram ao mesmo tempo pode gerar conflito, inconsistencia temporária
