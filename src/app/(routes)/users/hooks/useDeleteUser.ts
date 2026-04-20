@@ -30,7 +30,7 @@ export function useDeleteUser(initialUsers: UserWithCounts[]) {
         router.refresh();
       } catch (err) {
         toast.error("Não foi possível remover o usuário.");
-        console.error(err);
+        router.refresh();
       }
     });
   };
